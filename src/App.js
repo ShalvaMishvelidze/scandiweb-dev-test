@@ -62,6 +62,7 @@ class App extends Component {
 			}));
 		}
 	};
+
 	increaseCount = (item, itemIndex) => {
 		this.setState((prevState) => ({
 			cart: prevState.cart.map((cartItem) => {
@@ -107,6 +108,9 @@ class App extends Component {
 								setCategory={this.setCategory}
 								cart={this.state.cart}
 								category={this.state.category}
+								increaseCount={this.increaseCount}
+								decreaseCount={this.decreaseCount}
+								removeFromCart={this.removeFromCart}
 							/>
 						}
 					>

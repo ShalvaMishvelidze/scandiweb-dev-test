@@ -102,11 +102,22 @@ export default class Products extends Component {
 									<Link to={`/products/${id}`}>
 										<img src={gallery[0]} alt={name} />
 										<div>
-											<p className="name">{name}</p>
+											<p className="name">
+												{brand} {name}
+											</p>
 											<p className="price">
 												{prices[currency].amount}
 												{prices[currency].currency.symbol}
 											</p>
+										</div>
+										<div
+											className={
+												!inStock
+													? 'out-of-stock display-out-of-stock'
+													: 'out-of-stock'
+											}
+										>
+											out of stock
 										</div>
 									</Link>
 									<div
@@ -132,15 +143,6 @@ export default class Products extends Component {
 												className="cart-wheel-right"
 											/>
 										</div>
-									</div>
-									<div
-										className={
-											!inStock
-												? 'out-of-stock display-out-of-stock'
-												: 'out-of-stock'
-										}
-									>
-										out of stock
 									</div>
 								</div>
 							);

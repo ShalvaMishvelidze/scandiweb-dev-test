@@ -21,6 +21,9 @@ export default class Nav extends Component {
 		const categories = this.props.categories;
 		const currencies = this.props.currencies;
 		const category = this.props.category;
+		const increaseCount = this.props.increaseCount;
+		const decreaseCount = this.props.decreaseCount;
+		const removeFromCart = this.props.removeFromCart;
 
 		const quantity = cart.reduce((acc, item) => {
 			return acc + item.count;
@@ -32,7 +35,7 @@ export default class Nav extends Component {
 					if (this.state.dropdown || this.state.cartDropdown) {
 						this.setState({
 							dropdown: false,
-							cartDropdown: false,
+							// cartDropdown: false,
 						});
 					}
 				}}
@@ -171,11 +174,19 @@ export default class Nav extends Component {
 									: 'cart-overlay'
 							}
 						>
-							<CartOverlay cart={cart} currency={currency} />
+							<CartOverlay
+								cart={cart}
+								currency={currency}
+								increaseCount={increaseCount}
+								decreaseCount={decreaseCount}
+								removeFromCart={removeFromCart}
+							/>
 						</div>
 					</div>
 				</div>
-				<section>
+				<section
+					className={this.state.cartDropdown ? 'overlay-backdrop' : null}
+				>
 					<Outlet />
 				</section>
 				{error && <Error />}

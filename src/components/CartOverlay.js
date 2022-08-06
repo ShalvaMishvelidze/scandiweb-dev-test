@@ -5,6 +5,9 @@ export default class CartOverlay extends Component {
 	render() {
 		const cart = this.props.cart;
 		const currency = this.props.currency;
+		const increaseCount = this.props.increaseCount;
+		const decreaseCount = this.props.decreaseCount;
+		const removeFromCart = this.props.removeFromCart;
 
 		const total = cart.reduce((acc, item) => {
 			return acc + item.prices[currency].amount * item.count;
@@ -107,13 +110,25 @@ export default class CartOverlay extends Component {
 									</div>
 									<div className="overlay-item-right">
 										<div className="overlay-count-container">
-											<button className="overlay-plus-btn">
+											<button
+												className="overlay-plus-btn"
+												onClick={() => increaseCount(item, index)}
+											>
 												<div className="overlay-plus-btn-box">
 													<span>+</span>
 												</div>
 											</button>
 											<p className="overlay-count">{count}</p>
-											<button className="overlay-minus-btn">
+											<button
+												className="overlay-minus-btn"
+												onClick={() => {
+													decreaseCount(item, index);
+													if (count - 1 === 0) {
+														removeFromCart(index);
+													}
+													console.log('hello');
+												}}
+											>
 												<div className="overlay-minus-btn-box">
 													<span>-</span>
 												</div>

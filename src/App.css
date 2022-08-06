@@ -261,9 +261,9 @@
 	top: 0.15vw;
 }
 .text-att-container {
-	width: 4.5vw;
-	height: 3vw;
-	line-height: 3vw;
+	width: 12vh;
+	height: 7vh;
+	line-height: 7vh;
 	border: 1px black solid;
 	text-align: center;
 	margin-right: 0.8vw;
@@ -445,6 +445,9 @@
 }
 .show-overlay {
 	display: block;
+}
+.overlay-backdrop {
+	background-color: #39374838;
 }
 .cart-overlay-title {
 	font-weight: 400;
