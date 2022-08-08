@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Error from './Error';
-import CartOverlay from '../components/CartOverlay';
+import Categories from '../components/nav/Categories';
+import CurrencyContainer from '../components/nav/CurrencyContainer';
+import CartOverlayContainer from '../components/nav/CartOverlayContainer';
 
 export default class Nav extends Component {
 	constructor() {
@@ -24,6 +26,9 @@ export default class Nav extends Component {
 		const increaseCount = this.props.increaseCount;
 		const decreaseCount = this.props.decreaseCount;
 		const removeFromCart = this.props.removeFromCart;
+		const app = this.props.app;
+
+		const self = this;
 
 		const quantity = cart.reduce((acc, item) => {
 			return acc + item.count;
@@ -35,31 +40,17 @@ export default class Nav extends Component {
 					if (this.state.dropdown || this.state.cartDropdown) {
 						this.setState({
 							dropdown: false,
-							// cartDropdown: false,
 						});
 					}
 				}}
 			>
 				<div className="nav">
-					<div className="categories">
-						{categories &&
-							categories.map((navCategory, index) => {
-								return (
-									<Link to={'/'}>
-										<div
-											className={
-												index === category ? 'link active' : 'link'
-											}
-											onClick={() => {
-												setCategory(index);
-											}}
-										>
-											{navCategory.name}
-										</div>
-									</Link>
-								);
-							})}
-					</div>
+					<Categories
+						categories={categories}
+						setCategory={setCategory}
+						category={category}
+						app={app}
+					/>
 					<div className="logo">
 						<img
 							src="./images/svg 2.png"
@@ -82,107 +73,23 @@ export default class Nav extends Component {
 							className="logo-front-arrow-up"
 						/>
 					</div>
-					<div className="currency-container">
-						<button
-							className="currency-changer"
-							onClick={() => {
-								if (this.state.dropdown) {
-									this.setState({
-										dropdown: false,
-									});
-								} else {
-									this.setState({
-										dropdown: true,
-									});
-								}
-							}}
-						>
-							{currencies && currencies[currency].symbol}
-						</button>
-						<div
-							className={
-								this.state.dropdown
-									? `dropdown-menu display-block`
-									: `dropdown-menu`
-							}
-						>
-							{currencies &&
-								currencies.map((productCurrency, index) => {
-									return (
-										<button
-											className="currency-btn"
-											key={index}
-											onClick={() => {
-												setCurrency(index);
-												this.setState({
-													dropdown: false,
-												});
-											}}
-										>
-											{productCurrency.symbol}{' '}
-											{productCurrency.label}
-											<span></span>
-										</button>
-									);
-								})}
-						</div>
-					</div>
-					<div className="cart-overlay-container">
-						<button
-							className="cart-overlay-btn"
-							onClick={() => {
-								if (this.state.cartDropdown) {
-									this.setState({
-										cartDropdown: false,
-									});
-								} else {
-									this.setState({
-										cartDropdown: true,
-									});
-								}
-							}}
-						>
-							<div className="cart-overlay-icon-container">
-								<div
-									className={
-										quantity > 0
-											? 'cart-items-count display-cart-items-count'
-											: 'cart-items-count'
-									}
-								>
-									<span>{quantity}</span>
-								</div>
-								<div className="cart-overlay-icon">
-									<img src="./images/cart.png" alt="cart" />
-								</div>
-								<div className="cart-overlay-wheels-container">
-									<img
-										src="./images/cart-wheel.png"
-										alt="cart wheel"
-									/>
-									<img
-										src="./images/cart-wheel.png"
-										alt="cart wheel"
-									/>
-								</div>
-							</div>
-						</button>
-						<div
-							className={
-								this.state.cartDropdown
-									? 'cart-overlay show-overlay'
-									: 'cart-overlay'
-							}
-						>
-							<CartOverlay
-								cart={cart}
-								currency={currency}
-								increaseCount={increaseCount}
-								decreaseCount={decreaseCount}
-								removeFromCart={removeFromCart}
-							/>
-						</div>
-					</div>
+					<CurrencyContainer
+						self={self}
+						currencies={currencies}
+						currency={currency}
+						setCurrency={setCurrency}
+						app={app}
+					/>
+					<CartOverlayContainer
+						self={self}
+						cart={cart}
+						currency={currency}
+						increaseCount={increaseCount}
+						decreaseCount={decreaseCount}
+						removeFromCart={removeFromCart}
+						quantity={quantity}
+						app={app}
+					/>
 				</div>
 				<section
 					className={this.state.cartDropdown ? 'overlay-backdrop' : null}

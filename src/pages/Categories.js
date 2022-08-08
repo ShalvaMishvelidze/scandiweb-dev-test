@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { gql } from '@apollo/client';
 import { graphql } from '@apollo/client/react/hoc';
 import Error from './Error';
-import Products from '../components/Products';
+import Products from '../components/products/Products';
 
 class Categories extends Component {
 	render() {
@@ -10,6 +10,7 @@ class Categories extends Component {
 		const category = this.props.category;
 		const cart = this.props.cart;
 		const setCart = this.props.setCart;
+		const app = this.props.app;
 
 		const { data } = this.props;
 		const { error, loading } = data;
@@ -24,6 +25,7 @@ class Categories extends Component {
 					category={category}
 					cart={cart}
 					setCart={setCart}
+					app={app}
 				/>
 				{error && <Error />}
 				{loading && <p>Loading...</p>}

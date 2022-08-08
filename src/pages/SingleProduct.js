@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import Product from '../components/Product';
+import Product from '../components/product/Product';
 import { graphql } from '@apollo/client/react/hoc';
 import { gql } from '@apollo/client';
-import withRouter from '../components/withRouter';
+import withRouter from '../methods/withRouter';
 import Error from './Error';
 
 class SingleProduct extends Component {
 	render() {
-		const currency = this.props.currency;
-		const cart = this.props.cart;
-		const setCart = this.props.setCart;
-
 		const { data } = this.props;
 		const { loading, error } = data;
 
 		const product = data?.product;
+		const currency = this.props.currency;
+		const cart = this.props.cart;
+		const setCart = this.props.setCart;
+		const app = this.props.app;
 
 		return (
 			<>
@@ -23,6 +23,7 @@ class SingleProduct extends Component {
 					currency={currency}
 					cart={cart}
 					setCart={setCart}
+					app={app}
 				/>
 				{error && <Error />}
 				{loading && <p>Loading...</p>}

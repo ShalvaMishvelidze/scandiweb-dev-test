@@ -466,11 +466,13 @@
 	margin: 0;
 	padding-top: 0.7vh;
 	font-weight: 600;
-	font-size: 1rem;
+	font-size: 3vh;
+	line-height: 5vh;
 }
 .overlay-price {
 	margin: 0.1rem;
 	font-size: 3vh;
+	line-height: 5vh;
 }
 .cart-overlay-items-container {
 	display: flex;
@@ -489,6 +491,7 @@
 .overlay-att-name {
 	margin: 0;
 	font-size: 3vh;
+	line-height: 5vh;
 }
 .overlay-items-container {
 	display: flex;

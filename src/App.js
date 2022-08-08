@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { gql } from '@apollo/client';
 import { graphql } from '@apollo/client/react/hoc';
-import Cart from './pages/Cart';
+import Cart from './pages/CartPage';
 import Categories from './pages/Categories';
 import Nav from './pages/Nav';
 import SingleProduct from './pages/SingleProduct';
 import Error from './pages/Error';
 import './App.css';
+import { setCart } from './methods/setCart';
+import { setCurrency } from './methods/setCurrency';
+import { setCategory } from './methods/setCategory';
+import { increaseCount } from './methods/increaseCount';
+import { decreaseCount } from './methods/decreaseCount';
+import { removeFromCart } from './methods/removeFromCart';
 
 class App extends Component {
 	constructor() {
@@ -19,75 +25,11 @@ class App extends Component {
 		};
 	}
 
-	setCurrency = (index) => {
-		this.setState({
-			currency: index,
-		});
-	};
-
-	setCategory = (index) => {
-		this.setState({
-			category: index,
-		});
-	};
-
-	setCart = (item) => {
-		const checkItemInCart = this.state.cart.some((element) => {
-			return (
-				element.id === item.id &&
-				element.color === item.color &&
-				JSON.stringify(element.selectedAttributes) ===
-					JSON.stringify(item.selectedAttributes)
-			);
-		});
-		const itemIndex = this.state.cart.findIndex((cartItem) => {
-			return (
-				cartItem.id === item.id &&
-				cartItem.color === item.color &&
-				JSON.stringify(cartItem.selectedAttributes) ===
-					JSON.stringify(item.selectedAttributes)
-			);
-		});
-		if (!checkItemInCart) {
-			this.setState({
-				cart: [...this.state.cart, item],
-			});
-		} else {
-			this.setState((prevState) => ({
-				cart: prevState.cart.map((cartItem) => {
-					return cartItem.name === item.name
-						? { ...cartItem, count: this.state.cart[itemIndex].count + 1 }
-						: cartItem;
-				}),
-			}));
-		}
-	};
-
-	increaseCount = (item, itemIndex) => {
-		this.setState((prevState) => ({
-			cart: prevState.cart.map((cartItem) => {
-				return cartItem.name === item.name
-					? { ...cartItem, count: this.state.cart[itemIndex].count + 1 }
-					: cartItem;
-			}),
-		}));
-	};
-	decreaseCount = (item, itemIndex) => {
-		this.setState((prevState) => ({
-			cart: prevState.cart.map((cartItem) => {
-				return cartItem.name === item.name
-					? { ...cartItem, count: this.state.cart[itemIndex].count - 1 }
-					: cartItem;
-			}),
-		}));
-	};
-	removeFromCart = (itemIndex) => {
-		this.state.cart.splice(itemIndex, 1);
-	};
-
 	render() {
 		const { data } = this.props;
 		const { error, loading } = data;
+
+		const app = this;
 
 		const categories = data?.categories;
 		const currencies = data?.currencies;
@@ -104,13 +46,14 @@ class App extends Component {
 								categories={categories}
 								error={error}
 								loading={loading}
-								setCurrency={this.setCurrency}
-								setCategory={this.setCategory}
+								setCurrency={setCurrency}
+								setCategory={setCategory}
 								cart={this.state.cart}
 								category={this.state.category}
-								increaseCount={this.increaseCount}
-								decreaseCount={this.decreaseCount}
-								removeFromCart={this.removeFromCart}
+								increaseCount={increaseCount}
+								decreaseCount={decreaseCount}
+								removeFromCart={removeFromCart}
+								app={app}
 							/>
 						}
 					>
@@ -121,7 +64,8 @@ class App extends Component {
 									currency={this.state.currency}
 									category={this.state.category}
 									cart={this.state.cart}
-									setCart={this.setCart}
+									setCart={setCart}
+									app={app}
 								/>
 							}
 						/>
@@ -131,7 +75,8 @@ class App extends Component {
 								<SingleProduct
 									currency={this.state.currency}
 									cart={this.state.cart}
-									setCart={this.setCart}
+									setCart={setCart}
+									app={app}
 								/>
 							}
 						/>
@@ -141,9 +86,10 @@ class App extends Component {
 								<Cart
 									cart={this.state.cart}
 									currency={this.state.currency}
-									increaseCount={this.increaseCount}
-									decreaseCount={this.decreaseCount}
-									removeFromCart={this.removeFromCart}
+									increaseCount={increaseCount}
+									decreaseCount={decreaseCount}
+									removeFromCart={removeFromCart}
+									app={app}
 								/>
 							}
 						/>
