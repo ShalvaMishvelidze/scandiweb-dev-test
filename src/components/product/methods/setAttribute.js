@@ -1,4 +1,4 @@
-export const setAttribute = (e) => {
+export const setAttribute = (e, attribute) => {
 	const textAtts = Array.from(
 		e.currentTarget.querySelectorAll('.text-att-container')
 	);

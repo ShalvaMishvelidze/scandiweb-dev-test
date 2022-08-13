@@ -12,13 +12,12 @@ export default class TextAttribute extends Component {
 				{items.map((item) => {
 					const { value } = item;
 					return (
-						<div key={value}>
-							<div
-								className="text-att-container"
-								onClick={() => setSelectedAttributes(id, value, self)}
-							>
-								{value}
-							</div>
+						<div
+							key={value}
+							className="text-att-container"
+							onClick={() => setSelectedAttributes(id, value, self)}
+						>
+							{value}
 						</div>
 					);
 				})}

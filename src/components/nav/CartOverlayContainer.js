@@ -29,16 +29,16 @@ export default class CartOverlayContainer extends Component {
 					}}
 				>
 					<div className="cart-overlay-icon-container">
-						<div
-							className={
-								quantity > 0
-									? 'cart-items-count display-cart-items-count'
-									: 'cart-items-count'
-							}
-						>
-							<span>{quantity}</span>
-						</div>
 						<div className="cart-overlay-icon">
+							<div
+								className={
+									quantity > 0
+										? 'cart-items-count display-cart-items-count'
+										: 'cart-items-count'
+								}
+							>
+								<span>{quantity}</span>
+							</div>
 							<img src="./images/cart.png" alt="cart" />
 						</div>
 						<div className="cart-overlay-wheels-container">

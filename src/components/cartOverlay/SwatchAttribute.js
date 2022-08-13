@@ -6,7 +6,7 @@ export default class SwatchAttribute extends Component {
 		const color = this.props.color;
 
 		return (
-			<>
+			<div className="overlay-swatch-att">
 				{items.map((item) => {
 					const { value, id } = item;
 					return (
@@ -27,7 +27,7 @@ export default class SwatchAttribute extends Component {
 						</div>
 					);
 				})}
-			</>
+			</div>
 		);
 	}
 }

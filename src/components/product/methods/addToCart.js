@@ -14,7 +14,7 @@ export const addToCart = (product, setCart, cartProduct, self, app) => {
 		if (textAttNotSelected || !colorIsSelected) {
 			alert('select all items');
 		} else {
-			setCart(cartProduct);
+			setCart(cartProduct, app);
 		}
 	} else if (textAttNotSelected) {
 		alert('select all items');

@@ -91,11 +91,17 @@ export default class Nav extends Component {
 						app={app}
 					/>
 				</div>
-				<section
-					className={this.state.cartDropdown ? 'overlay-backdrop' : null}
-				>
+				<section>
 					<Outlet />
 				</section>
+				<section
+					className={
+						this.state.cartDropdown
+							? 'overlay-backdrop display-block'
+							: 'overlay-backdrop'
+					}
+				></section>
+
 				{error && <Error />}
 
 				{loading && <p>Loading...</p>}

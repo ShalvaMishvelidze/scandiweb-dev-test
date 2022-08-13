@@ -7,7 +7,7 @@ export default class TextAttributes extends Component {
 		const id = this.props.id;
 
 		return (
-			<>
+			<div className="overlay-text-att">
 				{items.map((item) => {
 					const { value } = item;
 					const selectedAttribute = selectedAttributes.some((element) => {
@@ -27,7 +27,7 @@ export default class TextAttributes extends Component {
 						</div>
 					);
 				})}
-			</>
+			</div>
 		);
 	}
 }

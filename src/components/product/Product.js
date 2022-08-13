@@ -5,7 +5,7 @@ import TextAttribute from './TextAttribute';
 import { Markup } from 'interweave';
 import { addToCart } from './methods/addToCart';
 import { setSelectedAttributes } from './methods/setSelectedAttributes';
-import { setAttribute } from './methods/setAttriute';
+import { setAttribute } from './methods/setAttribute';
 import { setColor } from './methods/setColor';
 
 export default class product extends Component {
@@ -49,15 +49,15 @@ export default class product extends Component {
 							alt={product.name}
 						/>
 						<div className="product-content">
-							<h1>
-								{product.brand} {product.name}
+							<h1 className="product-name">
+								<span>{product.brand}</span> {product.name}
 							</h1>
 							{product?.attributes &&
 								product.attributes.map((attribute) => {
 									const { id, name, type, items } = attribute;
 									return (
 										<div key={id} className="attribute-container">
-											<h1>{name}:</h1>
+											<h1 className="product-att-name">{name}:</h1>
 											<div
 												className="items-container"
 												onClick={(e) => setAttribute(e)}
@@ -83,8 +83,8 @@ export default class product extends Component {
 										</div>
 									);
 								})}
-							<h1>Price:</h1>
-							<h1>
+							<h1 className="product-price">Price:</h1>
+							<h1 className="product-price-value">
 								{product.prices[currency].amount}
 								{product.prices[currency].currency.symbol}
 							</h1>

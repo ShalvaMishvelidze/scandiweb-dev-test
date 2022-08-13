@@ -11,9 +11,9 @@ export default class ItemLeft extends Component {
 		return (
 			<div className="item-left">
 				<h1 className="cart-item-title">
-					{brand} {name}
+					<span>{brand}</span> {name}
 				</h1>
-				<p className="price">
+				<p className="cart-price">
 					{prices[currency].amount}
 					{prices[currency].currency.symbol}
 				</p>
@@ -21,8 +21,8 @@ export default class ItemLeft extends Component {
 					const { id, name, type, items } = attribute;
 					return (
 						<div key={id} className="attribute-container">
-							<h1>{name}:</h1>
-							<div className="items-container">
+							<h1 className="cart-att-name">{name}:</h1>
+							<div className="cart-att-container">
 								{type === 'swatch' &&
 									items.map((item) => {
 										const { value, id } = item;

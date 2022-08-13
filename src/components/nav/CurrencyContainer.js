@@ -24,7 +24,16 @@ export default class CurrencyContainer extends Component {
 						}
 					}}
 				>
-					{currencies && currencies[currency].symbol}
+					{currencies && currencies[currency].symbol}{' '}
+					<img
+						className="currency-arrow"
+						src={
+							self.state.dropdown
+								? './images/arrow-up.png'
+								: './images/arrow-down.png'
+						}
+						alt="arrow"
+					/>
 				</button>
 				<div
 					className={
