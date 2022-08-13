@@ -13,16 +13,12 @@ export default class SwatchAttribute extends Component {
 					return (
 						<div
 							key={id}
-							className="color-wrapper"
+							className="color-container"
 							onClick={(e) => setColor(e, id, self)}
-						>
-							<div
-								className="color-container"
-								style={{
-									backgroundColor: `${value}`,
-								}}
-							></div>
-						</div>
+							style={{
+								backgroundColor: `${value}`,
+							}}
+						></div>
 					);
 				})}
 			</>

@@ -31,17 +31,13 @@ export default class ItemLeft extends Component {
 												key={id}
 												className={
 													id === color
-														? 'color-wrapper wrapper-border'
-														: 'color-wrapper'
+														? 'color-container selected-color'
+														: 'color-container'
 												}
-											>
-												<div
-													className="color-container"
-													style={{
-														backgroundColor: `${value}`,
-													}}
-												></div>
-											</div>
+												style={{
+													backgroundColor: `${value}`,
+												}}
+											></div>
 										);
 									})}
 								{type !== 'swatch' &&

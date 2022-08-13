@@ -89,6 +89,7 @@ export default class Nav extends Component {
 						removeFromCart={removeFromCart}
 						quantity={quantity}
 						app={app}
+						cartDropdown={this.state.cartDropdown}
 					/>
 				</div>
 				<section>

@@ -14,17 +14,13 @@ export default class SwatchAttribute extends Component {
 							key={id}
 							className={
 								id === color
-									? 'overlay-color-wrapper overlay-wrapper-border'
-									: 'overlay-color-wrapper'
+									? 'overlay-color-container overlay-active-color'
+									: 'overlay-color-container'
 							}
-						>
-							<div
-								className="overlay-color-container"
-								style={{
-									backgroundColor: `${value}`,
-								}}
-							></div>
-						</div>
+							style={{
+								backgroundColor: `${value}`,
+							}}
+						></div>
 					);
 				})}
 			</div>
