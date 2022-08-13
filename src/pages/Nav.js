@@ -16,13 +16,11 @@ export default class Nav extends Component {
 	render() {
 		const currency = this.props.currency;
 		const setCurrency = this.props.setCurrency;
-		const setCategory = this.props.setCategory;
 		const cart = this.props.cart;
 		const error = this.props.error;
 		const loading = this.props.loading;
 		const categories = this.props.categories;
 		const currencies = this.props.currencies;
-		const category = this.props.category;
 		const increaseCount = this.props.increaseCount;
 		const decreaseCount = this.props.decreaseCount;
 		const removeFromCart = this.props.removeFromCart;
@@ -45,12 +43,7 @@ export default class Nav extends Component {
 				}}
 			>
 				<div className="nav">
-					<Categories
-						categories={categories}
-						setCategory={setCategory}
-						category={category}
-						app={app}
-					/>
+					<Categories categories={categories} app={app} />
 					<div className="logo">
 						<img
 							src="./images/svg 2.png"

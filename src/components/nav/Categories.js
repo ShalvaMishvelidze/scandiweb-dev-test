@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { setActiveCategory } from '../../methods/setActiveCategory';
 
 export default class Categories extends Component {
 	render() {
 		const categories = this.props.categories;
-		const setCategory = this.props.setCategory;
-		const category = this.props.category;
-		const app = this.props.app;
 
 		return (
 			<div className="categories">
 				{categories &&
 					categories.map((navCategory, index) => {
 						return (
-							<Link to={'/'}>
+							<Link to={`/${navCategory.name}`} key={index}>
 								<div
 									className={
-										index === category ? 'link active' : 'link'
+										categories && index === 0 ? 'link active' : 'link'
 									}
-									onClick={() => {
-										setCategory(index, app);
-									}}
+									onClick={(e) => setActiveCategory(e)}
 								>
 									{navCategory.name}
 								</div>

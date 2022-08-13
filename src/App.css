@@ -26,11 +26,10 @@
 	background-color: white;
 }
 .categories {
-	margin: auto 8.1vw;
+	margin: auto 7vw;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 2.2vw;
 }
 .categories a {
 	text-decoration: none;
@@ -42,11 +41,12 @@
 	text-transform: uppercase;
 	cursor: pointer;
 	font-weight: 400;
+	padding-left: 1.1vw;
+	padding-right: 1.1vw;
 }
 .active {
 	border-bottom: 2px solid #5ece7b;
 	color: #5ece7b;
-	font-weight: 500;
 }
 .logo {
 	position: fixed;
@@ -240,7 +240,7 @@
 	text-align: center;
 	bottom: 0rem;
 	right: 0rem;
-	font-size: 6vh;
+	font-size: 24px;
 	color: #8d8f9a;
 	font-weight: 400;
 	text-transform: uppercase;

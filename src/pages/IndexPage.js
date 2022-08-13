@@ -3,11 +3,11 @@ import { gql } from '@apollo/client';
 import { graphql } from '@apollo/client/react/hoc';
 import Error from './Error';
 import Products from '../components/products/Products';
+import withRouter from '../methods/withRouter';
 
-class Categories extends Component {
+class IndexPage extends Component {
 	render() {
 		const currency = this.props.currency;
-		const category = this.props.category;
 		const cart = this.props.cart;
 		const setCart = this.props.setCart;
 		const app = this.props.app;
@@ -15,14 +15,13 @@ class Categories extends Component {
 		const { data } = this.props;
 		const { error, loading } = data;
 
-		const categories = data?.categories;
+		const category = data?.category;
 
 		return (
 			<main className="main">
 				<Products
-					categories={categories}
-					currency={currency}
 					category={category}
+					currency={currency}
 					cart={cart}
 					setCart={setCart}
 					app={app}
@@ -34,40 +33,49 @@ class Categories extends Component {
 	}
 }
 
-export default graphql(
-	gql`
-		query {
-			categories {
-				name
-				__typename @skip(if: true)
-				products {
-					id
-					__typename @skip(if: true)
+export default withRouter(
+	graphql(
+		gql`
+			query GET_CATEGORY($categoryName: String!) {
+				category(input: { title: $categoryName }) {
 					name
-					inStock
-					gallery
-					attributes {
+					__typename @skip(if: true)
+					products {
 						id
 						__typename @skip(if: true)
 						name
-						type
-						items {
-							displayValue
-							__typename @skip(if: true)
-							value
+						inStock
+						gallery
+						attributes {
 							id
+							__typename @skip(if: true)
+							name
+							type
+							items {
+								displayValue
+								__typename @skip(if: true)
+								value
+								id
+							}
 						}
-					}
-					prices {
-						currency {
-							label
-							symbol
+						prices {
+							currency {
+								label
+								symbol
+							}
+							amount
 						}
-						amount
+						brand
 					}
-					brand
 				}
 			}
+		`,
+		{
+			options: (props) => ({
+				variables: {
+					categoryName: 'all',
+				},
+			}),
 		}
-	`
-)(Categories);
+	)(IndexPage)
+);
