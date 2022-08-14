@@ -5,7 +5,6 @@ import TextAttribute from './TextAttribute';
 import { Markup } from 'interweave';
 import { addToCart } from './methods/addToCart';
 import { setSelectedAttributes } from './methods/setSelectedAttributes';
-import { setAttribute } from './methods/setAttribute';
 import { setColor } from './methods/setColor';
 
 export default class product extends Component {
@@ -56,15 +55,17 @@ export default class product extends Component {
 								product.attributes.map((attribute) => {
 									const { id, name, type, items } = attribute;
 									return (
-										<div key={id} className="attribute-container">
+										<div
+											key={id}
+											className="attribute-container"
+											ref={this.setAttRef}
+										>
 											<h1 className="product-att-name">{name}:</h1>
-											<div
-												className="items-container"
-												onClick={(e) => setAttribute(e)}
-											>
+											<div className="items-container">
 												{type === 'swatch' && (
 													<SwatchAttribute
 														items={items}
+														color={this.state.color}
 														setColor={setColor}
 														self={self}
 													/>
@@ -72,6 +73,9 @@ export default class product extends Component {
 												{type !== 'swatch' && (
 													<TextAttribute
 														items={items}
+														cartAttributes={
+															this.state.cartAttributes
+														}
 														setSelectedAttributes={
 															setSelectedAttributes
 														}

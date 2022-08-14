@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { setActiveCategory } from '../../methods/setActiveCategory';
+import { NavLink } from 'react-router-dom';
 
 export default class Categories extends Component {
 	render() {
@@ -11,16 +10,16 @@ export default class Categories extends Component {
 				{categories &&
 					categories.map((navCategory, index) => {
 						return (
-							<Link to={`/${navCategory.name}`} key={index}>
-								<div
-									className={
-										categories && index === 0 ? 'link active' : 'link'
-									}
-									onClick={(e) => setActiveCategory(e)}
-								>
-									{navCategory.name}
-								</div>
-							</Link>
+							<NavLink
+								to={index === 0 ? `/` : `/${navCategory.name}`}
+								key={index}
+							>
+								{({ isActive }) => (
+									<div className={isActive ? 'link active' : 'link'}>
+										{navCategory.name}
+									</div>
+								)}
+							</NavLink>
 						);
 					})}
 			</div>
