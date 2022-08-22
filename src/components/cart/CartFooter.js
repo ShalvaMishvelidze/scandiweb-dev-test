@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { quantity } from '../../methods/quantity';
+import { total } from '../../methods/total';
 
 export default class CartFooter extends Component {
 	render() {
 		const cart = this.props.cart;
 		const currency = this.props.currency;
-		const total = this.props.total;
-		const quantity = this.props.quantity;
 
 		return (
 			<div className="cart-total">
@@ -13,24 +13,22 @@ export default class CartFooter extends Component {
 					tax 21%:{' '}
 					<span>
 						{cart[0].prices[currency].currency.symbol}
-						{parseFloat((total / 100) * 21).toFixed(2)}
+						{parseFloat((total(cart, currency) / 100) * 21).toFixed(2)}
 					</span>
 				</p>
 				<p>
-					quantity: <span>{quantity}</span>
+					quantity: <span>{quantity(cart)}</span>
 				</p>
 				<p>
 					total:{' '}
 					<span>
 						{cart[0].prices[currency].currency.symbol}
-						{parseFloat(total).toFixed(2)}
+						{parseFloat(total(cart, currency)).toFixed(2)}
 					</span>
 				</p>
 				<button
 					className="order-btn"
-					onClick={() => {
-						alert('Order Completed');
-					}}
+					onClick={() => alert('Order Completed')}
 				>
 					order
 				</button>

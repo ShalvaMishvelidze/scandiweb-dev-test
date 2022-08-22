@@ -17,7 +17,7 @@ export default class SwatchAttribute extends Component {
 							className={`${
 								color !== id ? '' : 'selected-color'
 							} color-container`}
-							onClick={(e) => setColor(id, self)}
+							onClick={() => setColor(id, self)}
 							style={{
 								backgroundColor: `${value}`,
 							}}

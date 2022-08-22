@@ -112,7 +112,7 @@
 	height: 6vh;
 	font-size: 18px;
 	text-align: left;
-	margin-left: 1vw;
+	padding-left: 2vw;
 }
 .currency-btn:hover {
 	background-color: #eeeeee;
@@ -241,7 +241,6 @@
 	bottom: 0rem;
 	right: 0rem;
 	font-size: 24px;
-	color: #8d8f9a;
 	font-weight: 400;
 	text-transform: uppercase;
 	display: none;
@@ -274,10 +273,27 @@
 	background: none;
 	border: none;
 }
+.PDP-active-image {
+	position: relative;
+	opacity: 0.5;
+}
 .product-image {
 	width: 42.5vw;
 	height: 78vh;
 	object-fit: scale-down;
+}
+.out-of-stock-PDP {
+	width: 42.5vw;
+	height: 78vh;
+	font-size: 3rem;
+	line-height: 78vh;
+	text-align: center;
+	text-transform: uppercase;
+	position: absolute;
+	top: 0;
+}
+.display-none {
+	display: none;
 }
 .product-content {
 	width: 21vw;

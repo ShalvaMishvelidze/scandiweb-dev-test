@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { increaseCount } from '../../methods/increaseCount';
+import { minus } from '../../methods/minus';
 
 export default class OverlayItemRight extends Component {
 	render() {
-		const increaseCount = this.props.increaseCount;
-		const decreaseCount = this.props.decreaseCount;
-		const removeFromCart = this.props.removeFromCart;
 		const gallery = this.props.gallery;
 		const count = this.props.count;
 		const index = this.props.index;
@@ -26,12 +25,7 @@ export default class OverlayItemRight extends Component {
 					<p className="overlay-count">{count}</p>
 					<button
 						className="overlay-minus-btn"
-						onClick={() => {
-							decreaseCount(item, index, app);
-							if (count - 1 === 0) {
-								removeFromCart(index, app);
-							}
-						}}
+						onClick={() => minus(item, index, app, count)}
 					>
 						<div className="overlay-minus-btn-box">
 							<span>-</span>

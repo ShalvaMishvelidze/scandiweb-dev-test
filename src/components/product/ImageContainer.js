@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { setImage } from './methods/setImage';
 
 export default class ImageContainer extends Component {
 	render() {
@@ -12,11 +13,7 @@ export default class ImageContainer extends Component {
 						<button
 							key={index}
 							className="img-btn"
-							onClick={() => {
-								self.setState({
-									image: index,
-								});
-							}}
+							onClick={() => setImage(self, index)}
 						>
 							<img key={image} src={image} alt={product.name} />
 						</button>

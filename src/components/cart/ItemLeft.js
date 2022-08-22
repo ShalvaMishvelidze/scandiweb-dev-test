@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SwatchAtt from './SwatchAtt';
+import TextAtt from './TextAtt';
 
 export default class ItemLeft extends Component {
 	render() {
@@ -23,48 +25,13 @@ export default class ItemLeft extends Component {
 						<div key={id} className="attribute-container">
 							<h1 className="cart-att-name">{name}:</h1>
 							<div className="cart-att-container">
-								{type === 'swatch' &&
-									items.map((item) => {
-										const { value, id } = item;
-										return (
-											<div
-												key={id}
-												className={
-													id === color
-														? 'color-container selected-color'
-														: 'color-container'
-												}
-												style={{
-													backgroundColor: `${value}`,
-												}}
-											></div>
-										);
-									})}
-								{type !== 'swatch' &&
-									items.map((item) => {
-										const { value } = item;
-										const selectedAttribute = selectedAttributes.some(
-											(element) => {
-												return (
-													element.id === id &&
-													element.value === value
-												);
-											}
-										);
-										return (
-											<div key={value}>
-												<div
-													className={
-														selectedAttribute
-															? 'text-att-container text-att-active'
-															: 'text-att-container'
-													}
-												>
-													{value}
-												</div>
-											</div>
-										);
-									})}
+								<SwatchAtt items={items} type={type} color={color} />
+								<TextAtt
+									items={items}
+									type={type}
+									selectedAttributes={selectedAttributes}
+									id={id}
+								/>
 							</div>
 						</div>
 					);

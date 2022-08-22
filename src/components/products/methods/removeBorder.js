@@ -1,5 +1,3 @@
-export const removeBorder = (e, index) => {
+export const removeBorder = (e) => {
 	e.currentTarget.classList.remove('products-hover');
-	const addToCart = Array.from(document.querySelectorAll('.add-to-cart'));
-	addToCart[index].classList.remove('display-add-to-cart');
 };

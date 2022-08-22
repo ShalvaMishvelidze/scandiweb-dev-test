@@ -3,12 +3,11 @@ import Product from '../components/product/Product';
 import { graphql } from '@apollo/client/react/hoc';
 import { gql } from '@apollo/client';
 import withRouter from '../methods/withRouter';
-import Error from './Error';
+import { pdpQuerry } from '../querries/pdpQuerry';
 
 class SingleProduct extends Component {
 	render() {
 		const { data } = this.props;
-		const { loading, error } = data;
 
 		const product = data?.product;
 		const currency = this.props.currency;
@@ -25,8 +24,6 @@ class SingleProduct extends Component {
 					setCart={setCart}
 					app={app}
 				/>
-				{error && <Error />}
-				{loading && <p>Loading...</p>}
 			</>
 		);
 	}
@@ -35,37 +32,7 @@ class SingleProduct extends Component {
 export default withRouter(
 	graphql(
 		gql`
-			query GET_PRODUCT($productId: String!) {
-				product(id: $productId) {
-					id
-					__typename @skip(if: true)
-					name
-					inStock
-					gallery
-					description
-					category
-					attributes {
-						id
-						__typename @skip(if: true)
-						name
-						type
-						items {
-							displayValue
-							__typename @skip(if: true)
-							value
-							id
-						}
-					}
-					prices {
-						currency {
-							label
-							symbol
-						}
-						amount
-					}
-					brand
-				}
-			}
+			${pdpQuerry}
 		`,
 		{
 			options: (props) => ({

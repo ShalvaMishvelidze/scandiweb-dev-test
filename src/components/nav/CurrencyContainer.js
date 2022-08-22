@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { setCurrencies } from './methods/setCurrencies';
+import { setDropdown } from './methods/setDropdown';
 
 export default class CurrencyContainer extends Component {
 	render() {
@@ -12,17 +14,7 @@ export default class CurrencyContainer extends Component {
 			<div className="currency-container">
 				<button
 					className="currency-changer"
-					onClick={() => {
-						if (self.state.dropdown) {
-							self.setState({
-								dropdown: false,
-							});
-						} else {
-							self.setState({
-								dropdown: true,
-							});
-						}
-					}}
+					onClick={() => setDropdown(self)}
 				>
 					{currencies && currencies[currency].symbol}{' '}
 					<img
@@ -48,15 +40,12 @@ export default class CurrencyContainer extends Component {
 								<button
 									className="currency-btn"
 									key={index}
-									onClick={() => {
-										setCurrency(index, app);
-										self.setState({
-											dropdown: false,
-										});
-									}}
+									onClick={() =>
+										setCurrencies(self, setCurrency, index, app)
+									}
 								>
-									{productCurrency.symbol} {productCurrency.label}
-									<span></span>
+									<span>{productCurrency.symbol}</span>{' '}
+									{productCurrency.label}
 								</button>
 							);
 						})}

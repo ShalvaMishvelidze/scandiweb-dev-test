@@ -1,7 +1,30 @@
+import { OverlayBtn } from './OverlayBtn';
 import React, { Component } from 'react';
+import { createRef } from 'react';
 import CartOverlay from '../cartOverlay/CartOverlay';
+import { setCartDropdownTrue } from './methods/setCartDropdownTrue';
 
 export default class CartOverlayContainer extends Component {
+	overlay = createRef();
+
+	componentDidMount() {
+		document.addEventListener('click', this.handleClickOutside);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('click', this.handleClickOutside);
+	}
+
+	handleClickOutside = (event) => {
+		if (
+			this.overlay.current &&
+			!this.overlay.current.contains(event.target)
+		) {
+			this.props.self.setState({
+				cartDropdown: false,
+			});
+		}
+	};
 	render() {
 		const self = this.props.self;
 		const quantity = this.props.quantity;
@@ -13,41 +36,10 @@ export default class CartOverlayContainer extends Component {
 		const app = this.props.app;
 
 		return (
-			<div className="cart-overlay-container">
-				<button
-					className="cart-overlay-btn"
-					onClick={() => {
-						if (self.state.cartDropdown) {
-							self.setState({
-								cartDropdown: false,
-							});
-						} else {
-							self.setState({
-								cartDropdown: true,
-							});
-						}
-					}}
-				>
-					<div className="cart-overlay-icon-container">
-						<div className="cart-overlay-icon">
-							<div
-								className={
-									quantity > 0
-										? 'cart-items-count display-cart-items-count'
-										: 'cart-items-count'
-								}
-							>
-								<span>{quantity}</span>
-							</div>
-							<img src="./images/cart.png" alt="cart" />
-						</div>
-						<div className="cart-overlay-wheels-container">
-							<img src="./images/cart-wheel.png" alt="cart wheel" />
-							<img src="./images/cart-wheel.png" alt="cart wheel" />
-						</div>
-					</div>
-				</button>
+			<div className="cart-overlay-container" ref={this.overlay}>
+				<OverlayBtn quantity={quantity} self={self} />
 				<div
+					onClick={() => setCartDropdownTrue(self)}
 					className={
 						self.state.cartDropdown
 							? 'cart-overlay show-overlay'

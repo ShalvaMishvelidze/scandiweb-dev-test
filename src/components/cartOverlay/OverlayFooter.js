@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { total } from '../../methods/total';
 
 export default class OverlayFooter extends Component {
 	render() {
 		const cart = this.props.cart;
 		const currency = this.props.currency;
-		const total = this.props.total;
 
 		return (
 			<div className="overlay-footer">
@@ -13,7 +13,7 @@ export default class OverlayFooter extends Component {
 					<span>total: </span>
 					<span>
 						{cart[0].prices[currency].currency.symbol}
-						{parseFloat(total).toFixed(2)}
+						{parseFloat(total(cart, currency)).toFixed(2)}
 					</span>
 				</div>
 				<div className="overlay-btn-container">
@@ -22,9 +22,7 @@ export default class OverlayFooter extends Component {
 					</Link>
 					<button
 						className="check-out-btn"
-						onClick={() => {
-							alert('Order Complete');
-						}}
+						onClick={() => alert('Order Complete')}
 					>
 						check out
 					</button>

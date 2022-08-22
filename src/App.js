@@ -5,15 +5,13 @@ import { graphql } from '@apollo/client/react/hoc';
 import Cart from './pages/CartPage';
 import IndexPage from './pages/IndexPage';
 import Nav from './pages/Nav';
-import SingleProduct from './pages/SingleProduct';
+import SingleProduct from './pages/PDP';
 import Error from './pages/Error';
 import './App.css';
 import { setCart } from './methods/setCart';
 import { setCurrency } from './methods/setCurrency';
-import { increaseCount } from './methods/increaseCount';
-import { decreaseCount } from './methods/decreaseCount';
-import { removeFromCart } from './methods/removeFromCart';
-import CategoriesPage from './pages/CategoriesPage';
+import CategoriesPage from './pages/PLP';
+import { navQuerry } from './querries/navQuerry';
 
 class App extends Component {
 	constructor() {
@@ -26,10 +24,7 @@ class App extends Component {
 
 	render() {
 		const { data } = this.props;
-		const { error, loading } = data;
-
 		const app = this;
-
 		const categories = data?.categories;
 		const currencies = data?.currencies;
 		return (
@@ -39,17 +34,11 @@ class App extends Component {
 						path="/"
 						element={
 							<Nav
-								key={categories?.name}
 								currency={this.state.currency}
 								currencies={currencies}
 								categories={categories}
-								error={error}
-								loading={loading}
 								setCurrency={setCurrency}
 								cart={this.state.cart}
-								increaseCount={increaseCount}
-								decreaseCount={decreaseCount}
-								removeFromCart={removeFromCart}
 								app={app}
 							/>
 						}
@@ -93,9 +82,6 @@ class App extends Component {
 								<Cart
 									cart={this.state.cart}
 									currency={this.state.currency}
-									increaseCount={increaseCount}
-									decreaseCount={decreaseCount}
-									removeFromCart={removeFromCart}
 									app={app}
 								/>
 							}
@@ -110,14 +96,6 @@ class App extends Component {
 
 export default graphql(
 	gql`
-		query {
-			categories {
-				name
-			}
-			currencies {
-				label
-				symbol
-			}
-		}
+		${navQuerry}
 	`
 )(App);

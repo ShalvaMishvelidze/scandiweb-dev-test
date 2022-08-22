@@ -1,11 +1,12 @@
+import { ProductFooter } from './ProductFooter';
+import { ActiveImage } from './ActiveImage';
 import React, { Component } from 'react';
 import ImageContainer from './ImageContainer';
-import SwatchAttribute from './SwatchAttribute';
-import TextAttribute from './TextAttribute';
-import { Markup } from 'interweave';
 import { addToCart } from './methods/addToCart';
 import { setSelectedAttributes } from './methods/setSelectedAttributes';
 import { setColor } from './methods/setColor';
+import { cartProduct } from './methods/cartProduct';
+import Attributes from './Attributes';
 
 export default class product extends Component {
 	constructor(props) {
@@ -25,84 +26,46 @@ export default class product extends Component {
 
 		const self = this;
 
-		let cartProduct = {
-			name: product?.name,
-			id: product?.id,
-			gallery: product?.gallery,
-			attributes: product?.attributes,
-			prices: product?.prices,
-			brand: product?.brand,
-			count: 1,
-			selectedAttributes: this.state.cartAttributes,
-			color: this.state.color,
-		};
-
 		return (
 			<>
 				{product && (
 					<div className="product">
 						<ImageContainer product={product} self={self} />
-						<img
-							className="product-image"
-							src={product.gallery[this.state.image]}
-							alt={product.name}
-						/>
+						<ActiveImage product={product} self={self} />
 						<div className="product-content">
 							<h1 className="product-name">
 								<span>{product.brand}</span> {product.name}
 							</h1>
 							{product?.attributes &&
 								product.attributes.map((attribute) => {
-									const { id, name, type, items } = attribute;
 									return (
 										<div
-											key={id}
+											key={attribute.id}
 											className="attribute-container"
 											ref={this.setAttRef}
 										>
-											<h1 className="product-att-name">{name}:</h1>
-											<div className="items-container">
-												{type === 'swatch' && (
-													<SwatchAttribute
-														items={items}
-														color={this.state.color}
-														setColor={setColor}
-														self={self}
-													/>
-												)}
-												{type !== 'swatch' && (
-													<TextAttribute
-														items={items}
-														cartAttributes={
-															this.state.cartAttributes
-														}
-														setSelectedAttributes={
-															setSelectedAttributes
-														}
-														self={self}
-														id={id}
-													/>
-												)}
-											</div>
+											<Attributes
+												attribute={attribute}
+												setColor={setColor}
+												color={this.state.color}
+												self={self}
+												cartAttributes={this.state.cartAttributes}
+												setSelectedAttributes={
+													setSelectedAttributes
+												}
+											/>
 										</div>
 									);
 								})}
-							<h1 className="product-price">Price:</h1>
-							<h1 className="product-price-value">
-								{product.prices[currency].amount}
-								{product.prices[currency].currency.symbol}
-							</h1>
-							<button
-								className="cart-btn"
-								onClick={() =>
-									addToCart(product, setCart, cartProduct, self, app)
-								}
-							>
-								add to cart
-							</button>
-							<div className="description">
-								<Markup content={product.description} />
-							</div>
+							<ProductFooter
+								addToCart={addToCart}
+								product={product}
+								setCart={setCart}
+								cartProduct={cartProduct}
+								self={self}
+								app={app}
+								currency={currency}
+							/>
 						</div>
 					</div>
 				)}

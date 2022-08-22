@@ -7,11 +7,6 @@ export default class Cart extends Component {
 	render() {
 		const cart = this.props.cart;
 		const currency = this.props.currency;
-		const increaseCount = this.props.increaseCount;
-		const decreaseCount = this.props.decreaseCount;
-		const removeFromCart = this.props.removeFromCart;
-		const total = this.props.total;
-		const quantity = this.props.quantity;
 		const app = this.props.app;
 
 		return (
@@ -29,9 +24,6 @@ export default class Cart extends Component {
 										name={name}
 										gallery={gallery}
 										count={count}
-										increaseCount={increaseCount}
-										decreaseCount={decreaseCount}
-										removeFromCart={removeFromCart}
 										app={app}
 										item={item}
 										index={index}
@@ -42,14 +34,7 @@ export default class Cart extends Component {
 						);
 					})}
 				</div>
-				{cart[0] && (
-					<CartFooter
-						cart={cart}
-						currency={currency}
-						total={total}
-						quantity={quantity}
-					/>
-				)}
+				{cart[0] && <CartFooter cart={cart} currency={currency} />}
 			</div>
 		);
 	}
