@@ -10,7 +10,7 @@ export default class OverlayFooter extends Component {
 		return (
 			<div className="overlay-footer">
 				<div className="overlay-total">
-					<span>total: </span>
+					<span className="total-span">total: </span>
 					<span>
 						{cart[0].prices[currency].currency.symbol}
 						{parseFloat(total(cart, currency)).toFixed(2)}

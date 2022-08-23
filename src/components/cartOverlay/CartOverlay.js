@@ -11,7 +11,7 @@ export default class CartOverlay extends Component {
 		const app = this.props.app;
 
 		return (
-			<div>
+			<div className="overlay-container">
 				<p className="cart-overlay-title">
 					<span>My Bag:</span> {quantity(cart)} items
 				</p>

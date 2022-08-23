@@ -15,7 +15,7 @@ export default class Products extends Component {
 					{category &&
 						category.products.map((product) => {
 							return (
-								<div key={product.id}>
+								<div key={product.id} className="grid-item">
 									<OneProduct
 										currency={currency}
 										setCart={setCart}

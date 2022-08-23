@@ -16,7 +16,7 @@ export default class CurrencyContainer extends Component {
 					className="currency-changer"
 					onClick={() => setDropdown(self)}
 				>
-					{currencies && currencies[currency].symbol}{' '}
+					{currencies && currencies[currency].symbol}
 					<img
 						className="currency-arrow"
 						src={

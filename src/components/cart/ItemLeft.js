@@ -16,8 +16,8 @@ export default class ItemLeft extends Component {
 					<span>{brand}</span> {name}
 				</h1>
 				<p className="cart-price">
-					{prices[currency].amount}
 					{prices[currency].currency.symbol}
+					{prices[currency].amount}
 				</p>
 				{attributes.map((attribute) => {
 					const { id, name, type, items } = attribute;
