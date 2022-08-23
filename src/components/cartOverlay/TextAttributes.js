@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { selectedAttribute } from '../../methods/selectedAttribute';
 
 export default class TextAttributes extends Component {
 	render() {
@@ -10,14 +11,11 @@ export default class TextAttributes extends Component {
 			<div className="overlay-text-att">
 				{items.map((item) => {
 					const { value } = item;
-					const selectedAttribute = selectedAttributes.some((element) => {
-						return element.id === id && element.value === value;
-					});
 					return (
 						<div key={value}>
 							<div
 								className={
-									selectedAttribute
+									selectedAttribute(selectedAttributes, id, value)
 										? 'overlay-text-att-container overlay-text-att-active'
 										: 'overlay-text-att-container'
 								}

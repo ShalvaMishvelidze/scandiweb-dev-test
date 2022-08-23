@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { selectedAttribute } from './methods/selectedAttribute';
+import { selectedAttribute } from '../../methods/selectedAttribute';
 
 export default class TextAtt extends Component {
 	render() {
